@@ -1,10 +1,6 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * app.js */
-game = new Game();
-console.log(game.getRandomPhrase());
-console.log(game.getRandomPhrase());
-console.log(game.getRandomPhrase());
-console.log(game.getRandomPhrase());
-console.log(game.getRandomPhrase());
-console.log(game.getRandomPhrase());
+const game = new Game();
+document.querySelector('#btn__reset').addEventListener('click', game.startGame);
+document.querySelector('#qwerty').addEventListener('click', game.handleInteraction(e.target));
