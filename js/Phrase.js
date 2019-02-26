@@ -3,7 +3,7 @@
  * Phrase.js */
 class Phrase{
     constructor(phrase){
-        this.phrase=phrase.toString().toLowerCase();
+        this.phrase=phrase.toLowerCase();
     }
     
     addPhraseToDisplay(){
@@ -18,12 +18,12 @@ class Phrase{
         }
     }
     checkLetter(selectedLetter){
-        if(phrase.indexOf(selectedLetter)!=-1){
-            return phrase.indexOf(selectedLetter);
+        if(this.phrase.indexOf(selectedLetter)!=-1){
+            return this.phrase.indexOf(selectedLetter);
         } else{ return false;}
     }
     showMatchedLetter(letter){
-        const letterPosition=phrase.indexOf(letter);
+        const letterPosition=this.phrase.indexOf(letter);
         const textBox=document.querySelectorAll('#phrase ul li')[letterPosition];
         textBox.textContent=letter;
         textBox.className='show';
