@@ -3,6 +3,7 @@
  * Game.js */
 class Game {
 
+    //constructor initializes especially an array with phrase objects
     constructor() {
         this.missed = 0;
         this.phrases = this.createPhrases();
@@ -19,17 +20,23 @@ class Game {
         ];
         return phrases;
     }
+
+    //gets a random phrase and assigns it the active phrase variable
     getRandomPhrase() {
         const randomNumber = Math.floor((Math.random() * this.phrases.length));
         return this.phrases[randomNumber];
     }
 
+    //starts the game while discarding overlay and reset last game status
     startGame() {
         this.resetGame();
         document.querySelector('#overlay').style.display = 'none';
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
     }
+
+    //compares if selected key matches the quote. It disables the selected key and gives it a class depending of its matching.
+    //It alsso checks for win/gameover and removes life if selected key is wrong
 
     handleInteraction(button) {
         const letter = button.textContent;
@@ -44,7 +51,7 @@ class Game {
         }
         button.setAttribute('disabled', true);
     }
-
+//simply replaces heart with an empty heart
     removeLife() {
         document.querySelectorAll('#scoreboard ol li')[this.missed].firstChild.src = 'images/lostHeart.png';
         this.missed++;
@@ -53,6 +60,7 @@ class Game {
         }
     }
 
+    //if won then calls the gameover function
     checkForWin() {
         const hiddenLetter = document.querySelectorAll('#phrase ul li:not(.show)');
         if (hiddenLetter.length == 0) {
@@ -60,6 +68,7 @@ class Game {
         }
     }
 
+    //shows changed overlay depending on result
     gameOver(result) {
         document.querySelector('#overlay').style.display = '';
         if (result == 'win') {
@@ -71,6 +80,7 @@ class Game {
             document.querySelector('#overlay h1').textContent = 'YOU LOSE';
         }
     }
+    //resets game stats
     resetGame() {
         this.missed = 0;
         if (document.querySelector('#phrase ul').hasChildNodes) {
@@ -78,7 +88,7 @@ class Game {
         }
         document.querySelectorAll('#qwerty button').forEach((element) => {
             if (element.hasAttribute('disabled')) {
-                element.setAttribute('disabled', false)
+                element.removeAttribute('disabled');
             }
             element.className = 'key';
         });
